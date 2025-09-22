@@ -31,9 +31,11 @@ export default function Home() {
     enabled: skip > 0,
   });
 
+ // pagination logic
   const numberOfCards = 5;
   const pageNum = skip / numberOfCards + 1;
   const MaxNumOfPages = data ? Math.ceil(data.total / numberOfCards) : 0;
+ 
   async function handleClick(skipValue: number) {
     setSkip(skipValue);
     refetch();
