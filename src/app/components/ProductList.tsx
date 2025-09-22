@@ -27,7 +27,7 @@ export default function ProductList({ numberOfCards }: props) {
 
   const pageNum = skip / numberOfCards + 1;
 
-  const { isFetching, error, data, refetch } = useQuery<data>({
+  const { isPending, isFetching, error, data, refetch } = useQuery<data>({
     queryKey: ["skip", skip],
     queryFn: async () => {
       const res = await fetch(
@@ -77,12 +77,21 @@ export default function ProductList({ numberOfCards }: props) {
           {error.message}
         </p>
       )}
-      {data && (
-        /* grid */
-        <div className="grid [grid-template-columns:repeat(auto-fit,minmax(15.5rem,17rem))] justify-center items-stretch gap-2 p-4 max-w-[109rem] mx-auto">
-
-        </div>
-      )}
+      {/* product grid */}
+      <div className="grid [grid-template-columns:repeat(auto-fit,minmax(15.5rem,17rem))] justify-center items-stretch gap-2 p-4 max-w-[109rem] mx-auto min-h-[22rem]">
+        {isFetching && !data && (
+          <p className="text-center text-5xl mt-36">Loading...</p>
+        )}
+        {data &&
+          data.products.map((n: product) => (
+            <ProductCard
+              key={n.id}
+              price={n.price}
+              title={n.title}
+              image={n.thumbnail}
+            />
+          ))}
+      </div>
       {/* pagination */}
       {showPagnation && (
         <div className="flex justify-center items-center gap-20">
