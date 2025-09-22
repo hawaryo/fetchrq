@@ -74,7 +74,7 @@ export default function Home() {
         <>
           {/* product cards */}
           <div className="grid [grid-template-columns:repeat(auto-fit,minmax(15.5rem,17rem))] justify-center items-stretch gap-2 p-4 max-w-[109rem] mx-auto">
-            {data.products.map((n: products) => (
+            {data.products.map((n: product) => (
               <ProductCard
                 key={n.id}
                 price={n.price}
