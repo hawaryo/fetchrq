@@ -16,7 +16,6 @@ interface data {
   total: number;
 }
 export default function Home() {
-  const [pageNum, setPageNum] = useState(1);
   const [skip, setSkip] = useState(0);
   const [btnType, setBtnType] = useState("initial");
 
@@ -32,12 +31,13 @@ export default function Home() {
     enabled: skip > 0,
   });
 
+  const numberOfCards = 5;
+  const pageNum = skip / numberOfCards + 1;
+  const MaxNumOfPages = data ? Math.ceil(data.total / numberOfCards) : 0;
   async function handleClick(skipValue: number) {
     setSkip(skipValue);
     refetch();
   }
-  const NumberOfCards = 5;
-  const MaxNumOfPages = data ? Math.ceil(data.total / NumberOfCards) : 0;
 
   //change button background while loading
   const initialLoadButtonClass = `border p-2 block mx-auto mt-4 ${
@@ -58,7 +58,6 @@ export default function Home() {
         className={initialLoadButtonClass}
         onClick={() => {
           handleClick(0);
-          setPageNum(1);
           setBtnType("initial");
         }}
         disabled={isFetching}
@@ -88,8 +87,7 @@ export default function Home() {
             <button
               className={backwardButtonClass}
               onClick={() => {
-                setSkip(skip - NumberOfCards);
-                setPageNum(pageNum - 1);
+                setSkip(skip - numberOfCards);
                 setBtnType("previous");
               }}
               aria-label="previous page"
@@ -103,8 +101,7 @@ export default function Home() {
             <button
               className={ForwardButtonClass}
               onClick={() => {
-                setSkip(skip + NumberOfCards);
-                setPageNum(pageNum + 1);
+                setSkip(skip + numberOfCards);
                 setBtnType("next");
               }}
               aria-label="next page"
