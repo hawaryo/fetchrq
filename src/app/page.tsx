@@ -3,14 +3,14 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import ProductCard from "./components/ProductCard";
 
-interface products {
+interface product {
   id: number;
   title: string;
   thumbnail: string;
   price: number;
 }
 interface data {
-  products: [];
+  products: product[];
   skip: number;
   limit: number;
   total: number;
