@@ -1,6 +1,6 @@
 This is a [Next.js](https://nextjs.org) simple fetching project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-link to the project: [https://fetch-xi-three.vercel.app/](https://fetch-xi-three.vercel.app/)
+link to the project: [https://github.com/hawaryo/fetchrq](https://github.com/hawaryo/fetchrq)
 
 ## Getting Started
 
