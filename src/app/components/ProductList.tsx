@@ -78,7 +78,7 @@ export default function ProductList({ numberOfCards }: props) {
         </p>
       )}
       {/* product grid */}
-      <div className="grid [grid-template-columns:repeat(auto-fit,minmax(15.5rem,17rem))] justify-center items-stretch gap-2 p-4 max-w-[109rem] mx-auto min-h-[22rem]">
+      <div className="grid [grid-template-columns:repeat(auto-fit,minmax(15.5rem,17rem))] justify-center items-stretch gap-2 p-4 max-w-[109rem] mx-auto min-h-[24rem]">
         {isFetching && !data && (
           <p className="text-center text-5xl mt-36">Loading...</p>
         )}
