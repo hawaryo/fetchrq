@@ -23,6 +23,7 @@ interface props {
 export default function ProductList({ numberOfCards }: props) {
   const [skip, setSkip] = useState(0);
   const [btnType, setBtnType] = useState("initial");
+  const [showPagnation, setShowPagnation] = useState(false);
 
   const pageNum = skip / numberOfCards + 1;
 
@@ -65,6 +66,7 @@ export default function ProductList({ numberOfCards }: props) {
         onClick={() => {
           handleClick(0);
           setBtnType("initial");
+          setShowPagnation(true);
         }}
         disabled={isFetching}
       >
@@ -76,47 +78,40 @@ export default function ProductList({ numberOfCards }: props) {
         </p>
       )}
       {data && (
-        <>
-          {/* product cards */}
-          <div className="grid [grid-template-columns:repeat(auto-fit,minmax(15.5rem,17rem))] justify-center items-stretch gap-2 p-4 max-w-[109rem] mx-auto">
-            {data.products.map((n: product) => (
-              <ProductCard
-                key={n.id}
-                price={n.price}
-                title={n.title}
-                image={n.thumbnail}
-              />
-            ))}
-          </div>
-          {/* pagination */}
-          <div className="flex justify-center items-center gap-20">
-            <button
-              className={backwardButtonClass}
-              onClick={() => {
-                setSkip(skip - numberOfCards);
-                setBtnType("previous");
-              }}
-              aria-label="previous page"
-              disabled={isFetching || skip === 0}
-            >
-              {"<"}
-            </button>
+        /* grid */
+        <div className="grid [grid-template-columns:repeat(auto-fit,minmax(15.5rem,17rem))] justify-center items-stretch gap-2 p-4 max-w-[109rem] mx-auto">
 
-            <p className="text-lg">{pageNum}</p>
+        </div>
+      )}
+      {/* pagination */}
+      {showPagnation && (
+        <div className="flex justify-center items-center gap-20">
+          <button
+            className={backwardButtonClass}
+            onClick={() => {
+              setSkip(skip - numberOfCards);
+              setBtnType("previous");
+            }}
+            aria-label="previous page"
+            disabled={isFetching || skip === 0}
+          >
+            {"<"}
+          </button>
 
-            <button
-              className={ForwardButtonClass}
-              onClick={() => {
-                setSkip(skip + numberOfCards);
-                setBtnType("next");
-              }}
-              aria-label="next page"
-              disabled={isFetching || pageNum === MaxNumOfPages}
-            >
-              {">"}
-            </button>
-          </div>
-        </>
+          <p className="text-lg">{pageNum}</p>
+
+          <button
+            className={ForwardButtonClass}
+            onClick={() => {
+              setSkip(skip + numberOfCards);
+              setBtnType("next");
+            }}
+            aria-label="next page"
+            disabled={isFetching || pageNum === MaxNumOfPages}
+          >
+            {">"}
+          </button>
+        </div>
       )}
     </>
   );
