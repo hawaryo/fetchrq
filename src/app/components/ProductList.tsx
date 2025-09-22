@@ -27,7 +27,7 @@ export default function ProductList({ numberOfCards }: props) {
 
   const pageNum = skip / numberOfCards + 1;
 
-  const { isPending, isFetching, error, data, refetch } = useQuery<data>({
+  const { isFetching, error, data, refetch } = useQuery<data>({
     queryKey: ["skip", skip],
     queryFn: async () => {
       const res = await fetch(
