@@ -31,7 +31,7 @@ export default function ProductList({ numberOfCards }: props) {
     queryKey: ["skip", skip],
     queryFn: async () => {
       const res = await fetch(
-        `https://dummyjson.com/products?limit=5&skip=${skip}&select=title,price,thumbnail`,
+        `https://dummyjson.com/products?limit=${numberOfCards}&skip=${skip}&select=title,price,thumbnail`,
       );
 
       return res.json();
@@ -125,4 +125,3 @@ export default function ProductList({ numberOfCards }: props) {
     </>
   );
 }
-  

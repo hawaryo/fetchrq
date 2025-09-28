@@ -1,5 +1,5 @@
 import ProductList from "./components/ProductList";
 
 export default function Home() {
-  return <ProductList numberOfCards={5} />;
+  return <ProductList numberOfCards={20} />;
 }
