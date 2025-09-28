@@ -31,7 +31,7 @@ export default function ProductList({ numberOfCards }: props) {
     queryKey: ["skip", skip],
     queryFn: async () => {
       const res = await fetch(
-        `https://dummyjson.com/products?limit=5&skip=${skip}&select=title,price,thumbnail`
+        `https://dummyjson.com/products?limit=5&skip=${skip}&select=title,price,thumbnail`,
       );
 
       return res.json();
@@ -73,14 +73,14 @@ export default function ProductList({ numberOfCards }: props) {
         {isFetching && btnType === "initial" ? "Loading...." : "Get Products"}
       </button>
       {error && (
-        <p className="bg-red-400 text-amber-50 p-2 w-[12rem] mx-auto text-center my-2">
+        <p className="mx-auto my-2 w-[12rem] bg-red-400 p-2 text-center text-amber-50">
           {error.message}
         </p>
       )}
       {/* product grid */}
-      <div className="grid [grid-template-columns:repeat(auto-fit,minmax(15.5rem,17rem))] justify-center items-stretch gap-2 p-4 max-w-[109rem] mx-auto min-h-[24rem]">
+      <div className="mx-auto grid min-h-[24rem] max-w-[109rem] [grid-template-columns:repeat(auto-fit,minmax(15.5rem,17rem))] items-stretch justify-center gap-2 p-4">
         {isFetching && !data && (
-          <p className="text-center text-5xl mt-36">Loading...</p>
+          <p className="mt-36 text-center text-5xl">Loading...</p>
         )}
         {data &&
           data.products.map((n: product) => (
@@ -94,7 +94,7 @@ export default function ProductList({ numberOfCards }: props) {
       </div>
       {/* pagination */}
       {showPagnation && (
-        <div className="flex justify-center items-center gap-20">
+        <div className="flex items-center justify-center gap-20">
           <button
             className={backwardButtonClass}
             onClick={() => {
@@ -125,3 +125,4 @@ export default function ProductList({ numberOfCards }: props) {
     </>
   );
 }
+  
