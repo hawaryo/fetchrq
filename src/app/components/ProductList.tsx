@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import ProductCard from "./ProductCard";
+import ArrowIcon from "./icons/ArrowIcon";
 
 interface product {
   id: number;
@@ -51,14 +52,6 @@ export default function ProductList({ numberOfCards }: props) {
     isFetching && btnType === "initial" ? "bg-amber-200" : ""
   }`;
 
-  const backwardButtonClass = `border p-2 ${
-    pageNum === 1 ? "bg-gray-200" : ""
-  }`;
-
-  const ForwardButtonClass = `border p-2 ${
-    pageNum === MaxNumOfPages ? "bg-gray-200" : ""
-  }`;
-
   return (
     <>
       <button
@@ -94,9 +87,8 @@ export default function ProductList({ numberOfCards }: props) {
       </div>
       {/* pagination */}
       {showPagnation && (
-        <div className="flex items-center justify-center gap-20">
+        <div className="mb-4 flex items-center justify-center gap-20 p-4">
           <button
-            className={backwardButtonClass}
             onClick={() => {
               setSkip(skip - numberOfCards);
               setBtnType("previous");
@@ -104,13 +96,12 @@ export default function ProductList({ numberOfCards }: props) {
             aria-label="previous page"
             disabled={isFetching || skip === 0}
           >
-            {"<"}
+            <ArrowIcon rotate={180} isdisabled={pageNum === 1} />
           </button>
 
-          <p className="text-lg">{pageNum}</p>
+          <p className="text-xl">{pageNum}</p>
 
           <button
-            className={ForwardButtonClass}
             onClick={() => {
               setSkip(skip + numberOfCards);
               setBtnType("next");
@@ -118,7 +109,7 @@ export default function ProductList({ numberOfCards }: props) {
             aria-label="next page"
             disabled={isFetching || pageNum === MaxNumOfPages}
           >
-            {">"}
+            <ArrowIcon rotate={0} isdisabled={pageNum === MaxNumOfPages} />
           </button>
         </div>
       )}
