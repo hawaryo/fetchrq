@@ -6,9 +6,9 @@ interface Props {
 
 export default function ProductCard({ image, title, price }: Props) {
   return (
-    <div className="flex items-center border p-2 sm:flex-col">
+    <div className="flex  items-center border p-2 sm:flex-col">
       <img
-        className="min-w-0"
+        className="min-w-0 max-w-[12.5rem] self-start sm:self-auto"
         src={image}
         alt={title}
         width="300"
